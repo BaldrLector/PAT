@@ -30,3 +30,42 @@ Sample Input:
 7 6 -2 -3
 Sample Output:
 43*/
+
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 102510;
+const int INF = 0xfffffff;
+
+int np, nc;
+int p[maxn], c[maxn];
+
+int main() {
+    freopen("C:\\Users\\71000\\CLionProjects\\demo\\data.in", "r", stdin);
+    scanf("%d", &nc);
+    for (int i = 0; i < nc; ++i) {
+        scanf("%d", &c[i]);
+    }
+    scanf("%d", &np);
+    for (int i = 0; i < np; ++i) {
+        scanf("%d", &p[i]);
+    }
+    sort(p, p + np);
+    sort(c, c + nc);
+    int i = 0, j, ans = 0;
+    while (i < nc && i < np && c[i] < 0 && p[i] < 0) {
+        ans += c[i] * p[i];
+        i++;
+    }
+    i = nc - 1;
+    j = np - 1;
+    while (i >= 0 && j >= 0 && c[i] > 0 && p[j] > 0) {
+        ans += c[i] * p[j];
+        i--, j--;
+    }
+    printf("%d", ans);
+    return 0;
+}
+
