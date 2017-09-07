@@ -28,3 +28,40 @@ Sample Input 2:
 Sample Output 2:
 None
 */
+*
+#include <cstdio>
+#include <algorithm>
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+const int maxn = 100010;
+const int INF = 0xfffffff;
+
+
+int num[maxn];
+int vis[maxn]={0};
+
+int main() {
+    freopen("C:\\Users\\71000\\CLionProjects\\demo\\data.in", "r", stdin);
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &num[i]);
+        vis[num[i]]++;
+    }
+    bool flag=false;
+    for (int i = 0; i < n; ++i) {
+        if(vis[num[i]]==1){
+            printf("%d", num[i]);
+            flag=true;
+            break;
+        }
+    }
+    if(flag==false){
+        printf("None");
+    }
+
+    return 0;
+}
