@@ -30,3 +30,50 @@ Sample Input:
 Sample Output:
 7*/
 
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 10010;
+const int INF = 0xfffffff;
+
+const int maxc = 210;
+
+int A[maxn], B[maxn], dp[maxc][maxn];
+
+int main() {
+    freopen("C:\\Users\\71000\\CLionProjects\\demo\\data.in", "r", stdin);
+
+    int n, m, L;
+    scanf("%d%d", &n, &m);
+    for (int i = 1; i <= m; ++i) {
+        scanf("%d", &A[i]);
+    }
+    scanf("%d", &L);
+
+    for (int i = 1; i <= L; ++i) {
+        scanf("%d", &B[i]);
+    }      
+    
+    //boundary
+    for (int i = 0; i <= m; ++i) {
+        dp[i][0] = 0;
+    }
+    for (int i = 0; i <= L; ++i) {
+        dp[0][i] = 0;
+    }
+    for (int i = 1; i <= m; ++i) {
+        for (int j = 1; j <= L; ++j) {
+            int MAX = max(dp[i - 1][j], dp[i][j - 1]);
+            if (A[i] == B[j]) {
+                dp[i][j] = MAX + 1;
+            } else {
+                dp[i][j] = MAX;
+            }
+        }
+    }
+    printf("%d\n", dp[m][L]);
+
+    return 0;
+}
