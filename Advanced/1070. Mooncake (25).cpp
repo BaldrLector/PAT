@@ -28,3 +28,51 @@ Sample Input:
 Sample Output:
 9.45*/
 
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 100010;
+const int INF = 0xfffffff;
+
+struct Mooncake {
+	double price;
+	double cnt;
+	double per;
+} m[maxn];
+
+bool cmp(Mooncake a, Mooncake b) {
+	return a.per > b.per;
+}
+
+int main() {
+    // freopen("C:\\Users\\71000\\CLionProjects\\demo\\data.in", "r", stdin);
+
+	int n;
+	double d;
+	scanf("%d%lf", &n, &d);
+	for (int i = 0; i < n; ++i) {
+		scanf("%lf", &m[i].cnt);
+	}
+	for (int i = 0; i < n; ++i) {
+		scanf("%lf", &m[i].price);
+		m[i].per = m[i].price / m[i].cnt;
+	}
+	sort(m, m + n, cmp);
+	double ans = 0.0;
+	for (int i = 0; i < n; ++i) {
+		if (m[i].cnt <= d) {
+			ans += m[i].price;
+			d -= m[i].cnt;
+		} else {
+			ans += m[i].per * d;
+			break;
+		}
+	}
+	printf("%.2f", ans);
+
+	return 0;
+}
+
+
