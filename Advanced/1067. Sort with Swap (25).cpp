@@ -29,3 +29,50 @@ Sample Input:
 10 3 5 7 2 6 4 9 0 8 1
 Sample Output:
 9*/
+
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 100010;
+const int INF = 0xfffffff;
+
+int pos[maxn];
+
+int main() {
+    // freopen("C:\\Users\\71000\\CLionProjects\\demo\\data.in", "r", stdin);
+
+    int n,ans=0;
+    scanf("%d", &n);
+    int left=n-1,num;
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &num);
+        pos[num]=i;
+        if(num==i&&num!=0){
+            left--;
+        }
+    }
+    int k=1;
+    while (left>0){
+        if(pos[0]==0){
+            while (k<n){
+                if(pos[k]!=k){
+                    swap(pos[0],pos[k]);
+                    ans++;
+                    break;
+                }
+                k++;
+            }
+        }
+        while (pos[0]!=0){
+            swap(pos[0],pos[pos[0]]);
+            ans++;
+            left--;
+        }
+    }
+    printf("%d", ans);
+
+
+    return 0;
+}
